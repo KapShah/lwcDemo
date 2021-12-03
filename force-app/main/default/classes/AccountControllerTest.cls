@@ -22,4 +22,5 @@ public with sharing class AccountControllerTest {
         list<Account> accDetail = AccountController.getAccountDetails(accList[0].id);
         System.assertEquals(accDetail[0].id, accList[0].id);
     }
+    
 }

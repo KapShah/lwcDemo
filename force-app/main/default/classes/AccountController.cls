@@ -13,4 +13,5 @@ public with sharing class AccountController {
 
         RETURN [SELECT Id, Name, Industry, Type, Owner.Name, Owner.SmallPhotoUrl FROM Account WHERE Id =: accountId ];
     }
+    
 }

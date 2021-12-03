@@ -1,0 +1,59 @@
+<template>
+    <div if:false={displayDetails} class="slds-grid slds-wrap">
+      <div class="slds-size_1-of-2 slds-var-p-around_medium">
+        <lightning-card title="Account List" icon-name="standard:account">
+          <div class="slds-var-p-around_medium">
+            <ul id="listOfAccounts" class="slds-has-dividers_around-space">
+              <template for:each={accountRecords} for:item="account">
+                <li
+                  class="slds-item"
+                  key={account.Id}
+                  id={account.Id}
+                  data-id={account.Id}
+                  onclick={handleClick}
+                >
+                  <ul>
+                    <li tabindex="0">{account.Name}</li>
+                  </ul>
+                </li>
+              </template>
+            </ul>
+          </div>
+          <div class="slds-m-top_small slds-m-bottom_medium">
+            <lightning-button variant="brand" label="Next" title="Show Details" onclick={showDetails} class="slds-m-left_x-small"></lightning-button>
+           </div>
+        </lightning-card>
+      </div>
+    </div>
+    <div if:true={displayDetails} class="slds-grid slds-wrap">
+        <div class="slds-size_1-of-2 slds-var-p-around_medium">
+          <lightning-card title="Account List" icon-name="standard:account">
+            <div class="slds-var-p-around_medium" >
+              <ul class="slds-has-dividers_around-space">
+                <template for:each={accountDetails} for:item="account">
+                  <li
+                    class="slds-item"
+                    key={account.Id}
+                    id={account.Id}
+                    data-id={account.Id}
+                    onclick={handleClick}
+                  >
+                    <ul >
+                      <li tabindex="0"><span style="padding-right:20px"><strong>Name:</strong></span>{account.Name}</li>
+                      <li tabindex="0"><span style="padding-right:20px"><strong>Industry:</strong></span>{account.Industry}</li>
+                      <li tabindex="0"><span style="padding-right:20px"><strong>Type:</strong></span>{account.Type}</li>
+                      <li tabindex="0"><span style="padding-right:20px"><strong>Owner:</strong></span>{account.Owner.Name}</li>
+                      <li class="image"><span style="padding-right:20px"><strong>Profile: </strong></span><img src={account.Owner.BannerPhotoUrl}></li>
+                    </ul>
+                  </li>
+                </template>
+              </ul>
+              <div class="slds-m-top_medium slds-m-bottom_medium">
+                <lightning-button variant="brand" label="Back" title="Back" onclick={hideDetails} class="slds-m-left_x-small"></lightning-button>
+               </div>
+            </div>
+
+          </lightning-card>
+        </div>
+      </div>
+  </template>
