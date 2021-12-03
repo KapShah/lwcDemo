@@ -1,0 +1,52 @@
+<template>
+    <div if:false={displayDetails} class="slds-grid slds-wrap">
+      <div class="slds-size_1-of-2 slds-var-p-around_medium">
+        <lightning-card title="Account List" icon-name="standard:account">
+          <div class="slds-var-p-around_medium">
+            <ul id="listOfAccounts" class="slds-has-dividers_around-space">
+              <template for:each={accountRecords} for:item="account">
+                <li
+                  class="slds-item"
+                  key={account.Id}
+                  id={account.Id}
+                  data-id={account.Id}
+                  onclick={handleClick}
+                >
+                  <ul>
+                    <li tabindex="0">{account.Name}</li>
+                  </ul>
+                </li>
+              </template>
+            </ul>
+          </div>
+          <div class="slds-m-top_small slds-m-bottom_medium">
+            <lightning-button variant="brand" label="Next" title="Show Details" onclick={showDetails} class="slds-m-left_x-small"></lightning-button>
+           </div>
+        </lightning-card>
+      </div>
+    </div>
+    <div if:true={displayDetails} class="slds-grid slds-wrap">
+      <div class="spinner">
+        <template if:true={setSpinner}>
+          <lightning-spinner alternative-text="Gett Account Details" variant="brand"></lightning-spinner>
+        </template>
+      </div>
+      <lightning-card class="slds-text-body_small">
+        <h3 slot="title">
+          <template for:each={accountDetails} for:item="account">
+            <img key={account.Id} src={account.Owner.SmallPhotoUrl} />
+          </template>
+        </h3>
+      </lightning-card>
+      <lightning-datatable
+          key-field="Id"
+          data={accountDetails}
+          columns={columns}
+          hide-checkbox-column="true">
+      </lightning-datatable>
+      <div class="slds-m-top_medium slds-m-bottom_medium">
+          <lightning-button variant="brand" label="Back" title="Back" onclick={hideDetails} class="slds-m-left_x-small"></lightning-button>
+      </div>
+    </div>
+
+  </template>
