@@ -1,7 +1,7 @@
+/*
+Test Class: AccountControllerTest
+*/
 public with sharing class AccountController {
-    public AccountController() {
-
-    }
 
     @AuraEnabled (Cacheable = True)
     public static List<Account> getAccounts() {
